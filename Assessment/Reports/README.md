@@ -1,8 +1,10 @@
 # Report title goes here
 
-name of author
+Melissa Sh. Cotrina
 
 ## Introduction
+
+Face recognition is a system that has gained more attention in last years due to the capacity that this technology has to identify the human face.  
 - an overview of what the project does
 - your inspiration for making the project 
 - examples that it is based on. 
@@ -10,9 +12,8 @@ name of author
 *probably ~200 words and images are good!*
 
 ## Research Question
-What is the problem you are trying to solve
 
-*probably 1 or 2 sentences*
+The research question of this work is how to identify a human face from an image or video frame more accurately.
 
 ## Application Overview
 Thinking back to the various application diagrams you have seen through the module - how would you describe an overview of the building blocks of your project - how do they connect, what do the component parts include.
@@ -20,6 +21,8 @@ Thinking back to the various application diagrams you have seen through the modu
 *probably ~200 words and a diagram is usually good to convey your design!*
 
 ## Data
+
+Tha data use on this project was downloaded from Google images using the Image Downloader extension 
 Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
 
 *probably ~200 words and images of what the data 'looks like' are good!*
