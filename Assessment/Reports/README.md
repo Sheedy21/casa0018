@@ -4,27 +4,29 @@ Melissa Sh. Cotrina
 
 ## Introduction
 
-Face recognition is a system that has gained more attention in last years due to the capacity that this technology has to identify the human face. To achieve this, it is necessary to have a set of images to train the model considering the different factors like the model, data size, image size, etc. that can help us to get a more accurated object detector. However, what if we have an image or video frame that no contains the whole face, will it be possible to recognize that as a face. For this reason, I use the Object Detection API to recognize some parts of the face as a first step to detect a face in an image. This model can help us also to recognize people who are using masks or glasses. Whit these results, we can get the exact number of people that are in a specific space. And then, it can be extended to consider the same method to identify different objects. To give a simple example that can reflect the importance of this work is the use of our smartphones that are not able to recognize a face if it is showed parcially.
+Face recognition is a system that has gained more attention in last years due to the capacity that this technology has to identify the human face. To achieve this, it is necessary to have a set of images to train the model considering the different factors like the model, data size, image size, etc. that can help us to get a more accurated object detector. However, what if we have an image or video frame that no contains the whole face, will it be possible to recognize that as a face. For this reason, I use the Object Detection API to recognize some parts of the face as a first step to detect a face in an image. This model can help us also to recognize people who are using masks or glasses. Whit these results, we can get the exact number of people that are in a specific space. And then, it can be extended to consider the same method to identify different objects. To give a simple example that can reflect the importance of this work is the use of our smartphones that are not able to recognize a face if it is showed parcially. In the picture below we can observe that eight of the nine people are recognized.
 
 ![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/people.jpg)
 
-
-
-
-- an overview of what the project does
-- your inspiration for making the project 
-- examples that it is based on. 
-
-*probably ~200 words and images are good!*
 
 ## Research Question
 
 The research question of this work is how to identify a human face from an image or video frame more accurately.
 
 ## Application Overview
-Thinking back to the various application diagrams you have seen through the module - how would you describe an overview of the building blocks of your project - how do they connect, what do the component parts include.
 
-*probably ~200 words and a diagram is usually good to convey your design!*
+This project was built considering three key building blocks and some suggestions received from the presentation. 
+
+- Input: To train this model was necessary a set of images with different sizes which were downloaded from Google images instead of taking pictures to have a variety of images. To automathize this process was necessary to use the Image Downloader extension.
+
+- Processing and storing: In this step was consider different enviroments to process the data and to train the model. With all the images downloaded, it was used jupyter notebook to get some descriptive statistics of the data; and then, all the images were standarized running a script in Anaconda prompt and labeled using LabelImg. In this procedure, it is important to mention that it took a lot of time to label all the images because we have to especify the object from the image. For this reason, at the beginning was considered a small dataset. Once, all the information was labeled, it is splitted in two folders (train and test) and then, they are exported in two csv files to generate the TFRecords. For this step was used two scripts from Dat Tran’s raccoon detector. Another important file that contains all the information required to train the model is the config file. This file was modified following the steps performed by Gilbert Tanner. For the next step, the clean data and all the input files were stored in a Github repository to train the model using a script created by Chengwei which was performed in Google Colab. This code was adapted to run the  experiments iteratively in this cloud service because of the different configurations and the type of processor that this environment supports.
+
+- Output: Once the data was processed, the model was evaluated considering short videos based on the probability of recognition for each object detected. For this step was used the code from zszazi's Object detection to evualate video frames.
+
+The diagram below summarizes all the procedures that have been done in this work.
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/diagram.jpg)
+
 
 ## Data
 
