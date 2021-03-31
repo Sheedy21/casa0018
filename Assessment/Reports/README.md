@@ -51,11 +51,11 @@ Once we got all the information, it was necessary to label each image using Labe
 
 Experiment 1 and 2:
 
-![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label1.jpg)
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label2.jpg)
 
 Experiment 3:
 
-![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label2.jpg)
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label1.jpg)
 
 
 With all the images labeled, they were divided for the train and test data. For this step was used two scripts from Dat Tran’s raccoon detector. The first file is "xml_to_csv.py" which exports two csv files, one for the train labeled information and other for the test labeled information. The other script used was "generate_tfrecord.py" which generates the TFRecords.
@@ -83,7 +83,13 @@ As we know, the first two models contemplate the three parts of the face (eye, n
 
 To test the models, it was used the code from zszazi's Object detection to evualate short videos. In the first 
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/exp_1.jpg)](https://www.youtube.com/watch?v=qmy4xwmZLA4)
+
+
+[![Watch the video](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/exp_2.jpg)](https://www.youtube.com/watch?v=ck8igFbP0yk)
+
+
+[![Watch the video](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/exp_3.jpg)](https://www.youtube.com/watch?v=qLuPpmfNz08)
 
 
 ## Results and Observations
