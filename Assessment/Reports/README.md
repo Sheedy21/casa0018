@@ -1,4 +1,4 @@
-# Report title goes here
+# Face Recognition
 
 Melissa Sh. Cotrina
 
@@ -17,11 +17,11 @@ The research question of this work is how to identify a human face from an image
 
 This project was built considering three key building blocks and some suggestions received from the presentation. 
 
-- Input: To train this model was necessary a set of images with different sizes which were downloaded from Google images instead of taking pictures to have a variety of images. To automathize this process was necessary to use the Image Downloader extension.
+- Input: To train this model was necessary a set of images with different sizes to run the different experiments.
 
-- Processing and storing: In this step was consider different enviroments to process the data and to train the model. With all the images downloaded, it was used jupyter notebook to get some descriptive statistics of the data; and then, all the images were standarized running a script in Anaconda prompt and labeled using LabelImg. In this procedure, it is important to mention that it took a lot of time to label all the images because we have to especify the object from the image. For this reason, at the beginning was considered a small dataset. Once, all the information was labeled, it is splitted in two folders (train and test) and then, they are exported in two csv files to generate the TFRecords. For this step was used two scripts from Dat Tran’s raccoon detector. Another important file that contains all the information required to train the model is the config file. This file was modified following the steps performed by Gilbert Tanner. For the next step, the clean data and all the input files were stored in a Github repository to train the model using a script created by Chengwei which was performed in Google Colab. This code was adapted to run the  experiments iteratively in this cloud service because of the different configurations and the type of processor that this environment supports.
+- Processing and storing: In this step was consider different enviroments to process the data and to train the model. With all the images downloaded, it was used jupyter notebook to get some descriptive statistics of the data; and then, all the images were standarized running a script in Anaconda prompt and labeled using LabelImg. Once, all the information was labeled, it was split in two folders (train and test data) and then, they were exported in two csv files to generate the TFRecords. Another file created to train the model was the label map that contains all the label information. And the last and most important file that contains all the information and parameters used for the custom object detector is the config file which was modified considering my own information. For the next step, the clean data and all the input files were stored in a Github repository to train the model, this procedure was performed in Google Colab. 
 
-- Output: Once the data was processed, the model was evaluated considering short videos based on the probability of recognition for each object detected. For this step was used the code from zszazi's Object detection to evualate video frames.
+- Output: Once the data was processed, the model was evaluated considering short videos based on the probability of recognition for each object detected. 
 
 The diagram below summarizes all the procedures that have been done in this work.
 
@@ -30,20 +30,61 @@ The diagram below summarizes all the procedures that have been done in this work
 
 ## Data
 
-Tha data use on this project was downloaded from Google images using the Image Downloader extension 
-Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
+Tha data used on this project was downloaded from Google images to have a variety of images for the first two experiments and extracted a sample from Kaggle's CelebFaces Attributes Dataset to perform the third experiment. To download the images from Google images was used the Image Downloader extension. To analyze the information of the three datasets, I created the script "resize_image" to get some statistics of the data and standardize all the images. The tables below show the descriptive statistics of the data utilized in the three experiments. For the first one was used 55 images with a high variation between the image sizes, the average size of them was 193x144 pixels  before the standardization; after that, the images were resized getting a size of 193x161 in average. For the second experiment was included larger images with a mean size of 509x429 pixels, after resizing them, there was not a significance difference in the mean size (509x513 pixels). In the case of the third experiment, it was not neccesary to resized the images because all the data was already clean showing an average size of 178x218 pixels. Once all the images were standardized, they where split for the training (90%) and testing data (10%).
 
-*probably ~200 words and images of what the data 'looks like' are good!*
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/statitics.jpg)
 
 ## Model
-This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
 
-*probably ~200 words and a diagram is usually good to describe your model!*
+The model used in the three experiments was SSD MobileNet V2, the single-stage detection model which is part of the Tensorflow object detection API. According to the description of this model, the architecture is characterized by the thin bottleneck layers of the input and output of the residual block (Francis). Furthermore, the SSD network is followed by several convolution layers. The reason that I consider this model is that it just need one shot to detect various objects (Liu, Wei et al., 2016). In the case of the first two experiments, it was consider the three parts of the face (eye, nose and mouth) while in the third, it was just considered the whole face.
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/model.jpg)
+
 
 ## Experiments
-What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
 
-*probably ~300 words and graphs and tables are usually good to convey your results!*
+In this work was considered three experiments and to performed them was necessary to generate the input files to train the models. As it was mentioned in the application overview, there were several scripts that were used and some file the were modified.
+
+The models created in this project were built following the steps performed by Gilbert Tanner. 
+
+Once we got all the information, it was necessary to label each image using LabelImg. For the first two experiments, it was necessary to specify each part of the face that was analyzed, while for the third experiment was considered the whole face.It is important to mention that this procedure took a lot of time to label all the images because it has to be done manually. For this reason, at the beginning was considered small datasets to train the models. The images below show this steps.
+
+Experiment 1 and 2:
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label1.jpg)
+
+Experiment 3:
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/label2.jpg)
+
+
+With all the images labeled, they were divided for the train and test data. For this step was used two scripts from Dat Tran’s raccoon detector. The first file is "xml_to_csv.py" which exports two csv files, one for the train labeled information and other for the test labeled information. The other script used was "generate_tfrecord.py" which generates the TFRecords.
+
+The next file that we need to create is the "label_map.pbtxt", this file contains all the labels with their respective id and description. Finally, the last file that we need to consider is the "pipeline_fname.config". This file is found in the sample folder of the Tensorflow repository; in this folder, we have to select the config file of the model that we want to use to train the object detector. In this file we have to change the number of classes or objects that we want to recognize, three for the two first experiments and one class for the last experiment. We also have to change the path of the label_map and TFRecords files.
+
+For the next step, it was used the script "tensorflow_custom_object_detection_vf.ipynb" created by Chengwei which was developed in Google Colab. This code was adapted to run the three experiments iteratively in this cloud service because of the different configurations and the type of processor that this environment supports. Once the three models were runned, we have to export them for future evaluations.
+
+The following parameters were considered for the three experiments:
+
+- Number of training steps: 1000
+- Number of evaluation steps: 50
+- Number of layers: 6
+- Number of classes: 3 (Experiment 1 and 2) and 1 (Experiment 3)
+- Batch size: 24
+- Sample size: 55 (Experiment 1 and 2) and 500 (Experiment 3)
+
+To evaluate the performance of the models, we have to run the "%tensorboard --logdir=training" function. In this case, it was considered the "loss" to evaluate the models.
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/tensorborad.jpg)
+
+As we know, the first two models contemplate the three parts of the face (eye, nose and mouth) with the difference in the average size of the images. Comparing both models, we can observe that the first model shows a lower loss of 3.90. However, if we compare this model with the third one, we can see that this last model enhances presenting a loss of 2.65. This improvment can be caused for the larger size considered in the third experiment. 
+
+![alt text](https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/loss.jpg)
+
+To test the models, it was used the code from zszazi's Object detection to evualate short videos. In the first 
+
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
@@ -51,19 +92,27 @@ Synthesis the main results and observations you made from building the project. 
 *probably ~300 words and remember images and diagrams bring results to life!*
 
 ## Bibliography
-*If you added any references then add them in here using this format:*
 
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+1. Tanner, G., 2021. Creating your own object detector with the Tensorflow Object Detection API. [online] Gilberttanner.com. Available at: <https://gilberttanner.com/blog/creating-your-own-objectdetector> [Accessed 30 March 2021].
 
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+2. GitHub. 2021. datitran/raccoon_dataset. [online] Available at: <https://github.com/datitran/raccoon_dataset> [Accessed 30 March 2021].
 
-----
+3. GitHub. 2021. zszazi/Object-detection-in-video. [online] Available at: <https://github.com/zszazi/Object-detection-in-video/blob/master/ObjectDectection_in_Video.ipynb> [Accessed 30 March 2021].
+
+4. Kaggle.com. 2021. CelebFaces Attributes (CelebA) Dataset. [online] Available at: <https://www.kaggle.com/jessicali9530/celeba-dataset> [Accessed 30 March 2021].
+
+5. Chengwei, 2021. Blog | DLology. [online] Dlology.com. Available at: <https://www.dlology.com/blog/author/Chengwei/> [Accessed 30 March 2021].
+
+6. Resources.wolframcloud.com. 2021. SSD-MobileNet V2 - Wolfram Neural Net Repository. [online] Available at: <https://resources.wolframcloud.com/NeuralNetRepository/resources/SSD-MobileNet-V2-Trained-on-MS-COCO-Data#:~:text=SSD%2DMobileNet%20V2%20Trained%20on%20MS%2DCOCO%20Data&text=Released%20in%202019%2C%20this%20model,box%20coordinates%20and%20class%20probabilities.&text=This%20model%20is%20part%20of%20the%20Tensorflow%20object%20detection%20API.> [Accessed 30 March 2021].
+
+7. Liu, Wei et al., 2016. SSD: Single Shot MultiBox Detector. Computer Vision – ECCV 2016, 9905, pp.21–37.
+
+8. GitHub. 2021. tensorflow/models. [online] Available at: <https://github.com/tensorflow/models> [Accessed 30 March 2021].
 
 ## Declaration of Authorship
 
-I, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+I, MELISSA COTRINA SALAS, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
 
 
-*Digitally Sign by typing your name here*
-
+Melissa Sh. Cotrina
 ASSESSMENT DATE
