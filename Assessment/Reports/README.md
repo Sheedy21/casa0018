@@ -8,8 +8,9 @@ https://github.com/Sheedy21/casa0018.git
 Face recognition is a system that has gained more attention in recent years due to the capacity that this technology has to identify the human face. To achieve this, it is necessary to have a set of images to train the object detector considering the different factors like the model, data size, image size, etc. These features can help us get a more accurate object detector. However, what if we have an image or video frame that no contains the whole face. Will it be possible to recognize that as a face?.
 For this reason, I used the Object Detection API to identify some parts of the face as a first step to detect a human face in an image. A model which can recognize people who are using masks or glasses. With these results, we won't need to train the model with other images, and we will be able to get the exact number of people in a specific space. And then, it can be extended to consider the same method to identify other objects. To give a simple example that can reflect the importance of this work is the use of our smartphones that are not able to recognize a face if it is showed partially. In the picture below, we can observe that eight of the nine people are recognized.
 
-<img align="center" width="100" height="100" src="https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/people1.jpg">
-
+<p align="center">
+  <img width="460" height="300" src="https://github.com/Sheedy21/casa0018/raw/main/Assessment/Reports/images/people1.jpg">
+</p>
 
 ## Research Question
 
